@@ -19,7 +19,7 @@ def getEggMoves(pokemon):
     link = 'https://pokemondb.net/pokedex/'+pokemon
     req = requests.get(link)
     soup_var = BeautifulSoup(req.text, 'html.parser')
-    anc = soup.find_all('table', class_ = 'data-table')[2]
+    anc = soup_var.find_all('table', class_ = 'data-table')[2]
     anc_2 = anc.find_all('tr')
     egglist_1 = []
     for row in anc_2[1:]:
@@ -32,22 +32,16 @@ def getEggMoves(pokemon):
 # Return a list of these times without the '@' symbol. E.g. ['2pm', '5 pm', '10am']
 def findLetters(sentences):
     # initialize an empty list
-    
-
-    # define the regular expression
-    
-
-    # loop through each sentence or phrase in sentences
-    
-
-    # find all the words that match the regular expression in each sentence
-       
-
-    # loop through the found words and add the words to your empty list
-
+    ltrs = []
+    r_exp = '@\d+ ?[ap]m'
+    for phrase in sentences:
+        sentence = re.findall(r_exp, phrase)
+        for a in sentence:
+           a = a.strip('@')
+           ltrs.append(a)
 
     #return the list of the last letter of all words that begin or end with a capital letter
-
+    return ltrs
 
 
 def main():
